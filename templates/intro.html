@@ -1,0 +1,23 @@
+<!-- IF ERROR -->
+    <p><strong><span style='color:#ff0000'>ERROR:</span></strong> {ERROR} Please try again.</p>
+<!-- ENDIF -->
+<!-- IF FATAL_ERROR -->
+    <p><strong><span style='color:#ff0000'>FATAL ERROR:</span></strong> {FATALERROR}</p>
+<!-- ENDIF -->
+
+<p>Welcome to {SITENAME}, a quick and easy lottery. Here's how you play:</p>
+
+<ol>
+    <li>Enter your address for winnings to be sent to below.</li>
+    <li>Send {COST} BTC to the address given to you on the next page.</li>
+    <li>For every {COST} BTC you send, you will be entered once into the drawing.</li>
+    <li>At {DRAWTIME}, one winner will be randomly selected.</li>
+    <li>If you are selected, {WINNERPERCENTAGE}% of the pot will be sent to you. The other {OWNERPERCENTAGE}% goes to supporting {SITENAME}.</li>
+</ol>
+
+<p>If you would still like to play, please enter your address below:</p>
+
+<form method='post' action=''>
+<input type='text' name='address' size="40" />
+<input type='submit' name='submit' value='Continue' />
+</form>
