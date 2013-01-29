@@ -3,7 +3,7 @@
 					COPYRIGHT
 
 Copyright 2007 Sergio Vaccaro <sergio@inservibile.org>
-Modified 2011 John Maguire for cURL support <johnmaguire2013@gmail.com>
+Modified 2011 John Maguire for cURL support <john@leftforliving.com>
 
 This file is part of JSON-RPC PHP.
 
