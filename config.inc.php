@@ -28,8 +28,8 @@ $owner_key = '17e4VkKpUdu9AP63feCgtYokFSfvcXL1QW';
 /* Percentage to send, in decimal */
 $owner_fee = .01;
 
-/* Time cron is set to run give_prize.php, (format suggested: 8:30pm GMT) */
-$draw_time = "8:30pm GMT";
+/* Time cron is set to run give_prize.php, (format suggested: 8:30pm UTC-5) */
+$draw_time = "8:30pm UTC-5";
 
 /* Ticket cost, in BTC */
 $ticket_cost = 1;
