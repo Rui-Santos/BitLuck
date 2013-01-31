@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @author John "lulzplzkthx" Maguire <johnmaguire2013@gmail.com>
+ * @author John "JohnMaguire2013" Maguire <john@leftforliving.com>
  * @package BitLuck
- * @version 0.2
+ * @version 0.3
  * @license http://www.gnu.org/licenses/lgpl-3.0.txt GNU Lesser General Public License
  */
 

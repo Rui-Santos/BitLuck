@@ -3,7 +3,7 @@
 /**
  * @author John "JohnMaguire2013" Maguire <john@leftforliving.com>
  * @package BitLuck
- * @version 0.2
+ * @version 0.3
  * @license http://www.gnu.org/licenses/lgpl-3.0.txt GNU Lesser General Public License
  */
 
@@ -16,7 +16,12 @@ $template = new template();
 $template->set_custom_template('templates', 'default');
 
 /* Find the pot size to entice viewers */
-$pot_size = number_format($bc->getbalance("Lottery Pot"), 2) . " BTC";
+try {
+    $pot_size = number_format($bc->getbalance("Lottery Pot"), 2) . " BTC";
+} catch(Exception $e) {
+    if($debug) echo "EXCEPTION: " . $e->getMessage();
+    else die("Sorry, an error occured and we cannot continue processing this page.");
+}
 
 /* Site name */
 $template->assign_vars(array(
@@ -37,11 +42,21 @@ $template->set_filenames(array(
 if(isset($_POST['submit']))
 {
     /* Check if the address was valid */
-    $resp = $bc->validateaddress($_POST['address']);
+    try {
+        $resp = $bc->validateaddress($_POST['address']);
+    } catch(Exception $e) {
+        if($debug) echo "EXCEPTION: " . $e->getMessage();
+        else die("Sorry, an error occured and we cannot continue processing this page.");
+    }
     if($resp['isvalid'])
     {
         /* Find or generate the key for them to send to, save it */
-        $addr = $bc->getaccountaddress("Incoming from " . $_POST['address']);
+        try {
+            $addr = $bc->getaccountaddress("Incoming from " . $_POST['address']);
+        } catch(Exception $e) {
+            if($debug) echo "EXCEPTION: " . $e->getMessage();
+            else die("Sorry, an error occured and we cannot continue processing this page.");
+        }
         $conn = new mysqli($sql_host, $sql_user, $sql_pass, $sql_db);
         
         if($conn->connect_error)
@@ -128,8 +143,13 @@ else
                 $stmt->fetch();
                 $stmt->close();
                 
-                $btc = $bc->getreceivedbyaddress($receiving_address);
-                $passed = true;
+                try {
+                    $btc = $bc->getreceivedbyaddress($receiving_address);
+                    $passed = true;
+                } catch(Exception $e) {
+                    if($debug) echo "EXCEPTION: " . $e->getMessage();
+                    else die("Sorry, an error occured and we cannot continue processing this page.");
+                }
                 
                 if($btc >= $ticket_cost)
                 {
@@ -150,8 +170,13 @@ else
                     if($conn->query($query))
                     {
                         /* Move the coins out of their account */
-                        $bc->move("Incoming from " . $winning_address, "Lottery Pot", $btc);
-                        
+                        try {
+                            $bc->move("Incoming from " . $winning_address, "Lottery Pot", $btc);
+                        } catch(Exception $e) {
+                            if($debug) echo "EXCEPTION: " . $e->getMessage();
+                            else die("Sorry, an error occured and we cannot continue processing this page.");
+                        }
+
                         /* Delete from unconfirmed entries */
                         $stmt = $conn->prepare("DELETE FROM `unconfirmed_entries` " .
                                                "WHERE `id` = ?");

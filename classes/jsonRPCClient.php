@@ -4,6 +4,7 @@
 
 Copyright 2007 Sergio Vaccaro <sergio@inservibile.org>
 Modified 2011 John Maguire for cURL support <john@leftforliving.com>
+Modified 2013 John Maguire for down detection <john@leftforliving.com>
 
 This file is part of JSON-RPC PHP.
 
@@ -134,7 +135,8 @@ class jsonRPCClient {
         ));
         
         $response = curl_exec($ch);
-        if($response === false)
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if($http_code < 200 || $http_code >= 300)
         {
 			throw new Exception('Unable to connect to '.$this->url);
 		}
