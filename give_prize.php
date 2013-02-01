@@ -17,10 +17,8 @@ $arr = $res->fetch_assoc();
 
 /* Now we want to attempt to send them the cash */
 $winning_address = $arr['winning_address'];
-if(!empty($winning_address))
-{
-    try
-    {
+if(!empty($winning_address)) {
+    try {
         /* Calculate pot size */
         $pot_size = $bc->getbalance("Lottery Pot");
         
@@ -42,13 +40,9 @@ if(!empty($winning_address))
         $conn->query($query2);
         
         echo "SUCCESS";
-    }
-    catch(Exception $e)
-    {
+    } catch(Exception $e) {
         echo "ERROR: " . $e->getMessage();
     }
-}
-else
-{
+} else {
     echo "ERROR: No players; no winners.";
 }
