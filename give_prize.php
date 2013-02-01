@@ -20,7 +20,7 @@ $winning_address = $arr['winning_address'];
 if(!empty($winning_address)) {
     try {
         /* Calculate pot size */
-        $pot_size = $bc->getbalance("Lottery Pot") - 0.0005;
+        $pot_size = $bc->getbalance("Lottery Pot") - 0.001;
         
         /* Calculate amount to send to owner, then winner */
         $bonus = $pot_size * $owner_fee;
