@@ -145,7 +145,6 @@ else
                 
                 try {
                     $btc = $bc->getreceivedbyaddress($receiving_address);
-                    $passed = true;
                 } catch(Exception $e) {
                     if($debug) echo "EXCEPTION: " . $e->getMessage();
                     else die("Sorry, an error occured and we cannot continue processing this page.");
