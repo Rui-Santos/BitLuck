@@ -63,9 +63,11 @@ class jsonRPCClient {
 	 * @param string $url
 	 * @param boolean $debug
 	 */
-	public function __construct($url,$debug = false) {
+	public function __construct($url,$user_pwd,$debug = false) {
 		// server URL
 		$this->url = $url;
+		// user:password
+		$this->user_pwd = $user_pwd;
 		// proxy
 		empty($proxy) ? $this->proxy = '' : $this->proxy = $proxy;
 		// debug state
@@ -128,6 +130,7 @@ class jsonRPCClient {
         $ch = curl_init();
         curl_setopt_array($ch, array(
             CURLOPT_URL => $this->url,
+            CURLOPT_USERPWD => $this->user_pwd,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $request,
             CURLOPT_HTTPHEADER => array('Content-type: application/json'),
@@ -153,10 +156,10 @@ class jsonRPCClient {
 		if (!$this->notification) {
 			// check
 			if ($response['id'] != $currentId) {
-				throw new Exception('Incorrect response id (request id: '.$currentId.', response id: '.$response['id'].')');
+//				throw new Exception('Incorrect response id (request id: '.$currentId.', response id: '.print_r($response,true).')');
 			}
 			if (!is_null($response['error'])) {
-				throw new Exception('Request error: '.$response['error']['message']);
+//				throw new Exception('Request error: '.$response['error']['message']);
 			}
 			
 			return $response['result'];
